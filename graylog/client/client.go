@@ -5,6 +5,7 @@ import (
 
 	"github.com/suzuki-shunsuke/go-httpclient/httpclient"
 
+	authzSharesEntities "github.com/one-2-one/terraform-provider-graylog/graylog/client/authz/shares/entities"
 	"github.com/one-2-one/terraform-provider-graylog/graylog/client/dashboard"
 	"github.com/one-2-one/terraform-provider-graylog/graylog/client/dashboard/position"
 	"github.com/one-2-one/terraform-provider-graylog/graylog/client/dashboard/widget"
@@ -30,15 +31,15 @@ import (
 	"github.com/one-2-one/terraform-provider-graylog/graylog/client/system/pipeline/pipeline"
 	"github.com/one-2-one/terraform-provider-graylog/graylog/client/system/pipeline/rule"
 	"github.com/one-2-one/terraform-provider-graylog/graylog/client/user"
+	userOutput "github.com/one-2-one/terraform-provider-graylog/graylog/client/user/output"
 	userToken "github.com/one-2-one/terraform-provider-graylog/graylog/client/user/token"
-	authzSharesEntities "github.com/one-2-one/terraform-provider-graylog/graylog/client/authz/shares/entities"
 	"github.com/one-2-one/terraform-provider-graylog/graylog/client/view"
 	"github.com/one-2-one/terraform-provider-graylog/graylog/config"
 )
 
 type Client struct {
 	APIVersion              string
-	AuthzSharesEntities			authzSharesEntities.Client
+	AuthzSharesEntities     authzSharesEntities.Client
 	AlarmCallback           alarmcallback.Client
 	AlertCondition          condition.Client
 	Collector               collector.Client
@@ -66,6 +67,7 @@ type Client struct {
 	View                    view.Client
 	User                    user.Client
 	UserToken               userToken.Client
+	UserOutput              userOutput.Client
 }
 
 func New(m interface{}) (Client, error) {
@@ -164,6 +166,9 @@ func New(m interface{}) (Client, error) {
 			Client: httpClient,
 		},
 		UserToken: userToken.Client{
+			Client: httpClient,
+		},
+		UserOutput: userOutput.Client{
 			Client: httpClient,
 		},
 		AuthzSharesEntities: authzSharesEntities.Client{
