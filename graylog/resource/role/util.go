@@ -3,7 +3,7 @@ package role
 import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/zahiar/terraform-provider-graylog/graylog/convert"
+	"github.com/one-2-one/terraform-provider-graylog/graylog/convert"
 )
 
 const (

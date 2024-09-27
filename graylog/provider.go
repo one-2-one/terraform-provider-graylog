@@ -3,7 +3,7 @@ package graylog
 import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/zahiar/terraform-provider-graylog/graylog/provider"
+	"github.com/one-2-one/terraform-provider-graylog/graylog/provider"
 )
 
 // Provider returns a terraform resource provider for graylog.
