@@ -19,6 +19,19 @@ jobs:
         with:
           go-version: 1.17
 
+      - name: Kill any existing GPG agent
+        run: gpgconf --kill gpg-agent
+
+      - name: Configure GPG agent
+        run: |
+          eval $(gpg-connect-agent --quiet /bye)
+          export GPG_TTY=$(tty)
+          export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+          mkdir -p ~/.gnupg
+          echo "use-agent" > ~/.gnupg/gpg.conf
+          echo "default-cache-ttl 7200" > ~/.gnupg/gpg-agent.conf
+          echo "max-cache-ttl 7200" >> ~/.gnupg/gpg-agent.conf
+
       - uses: hashicorp/ghaction-import-gpg@v2.1.0
         id: import_gpg
         env:
